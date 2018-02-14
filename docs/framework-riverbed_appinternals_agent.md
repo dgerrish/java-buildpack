@@ -3,10 +3,7 @@ The Riverbed Appinternals Agent Framework causes an application to be bound with
 
 <table>
   <tr>
-    <td><strong>Detection Criterion</strong></td><td>Existence of a single bound Riverbed Appinternals service.
-      <ul>
-        <li>Existence of a Riverbed Appinternals service is defined by the <a href="http://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html#VCAP-SERVICES"><code>VCAP_SERVICES</code></a> payload containing a service who's name, label or tag has case insensative <code>appinternals</code> as a substring.</li>
-      </ul>
+    <td><strong>Detection Criterion</strong></td><td>Existence of a single bound Riverbed Appinternals agent service. The existence of an agent service is defined by the <a href="http://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html#VCAP-SERVICES"><code>VCAP_SERVICES</code></a> payload containing a service name, label or tag with <code>appinternals</code> as a substring (the substring is case insensitive).
     </td>
   </tr>
   <tr>
@@ -17,20 +14,19 @@ The Riverbed Appinternals Agent Framework causes an application to be bound with
 Tags are printed to standard output by the buildpack detect script
 
 ## User-Provided Service
-When binding Riverbed Appinternals Agent service using a user-provided service, it must have <code>appinternals</code> as substring. The credential payload can contain following entries: 
+When binding Appinternals using a user-provided service, it must have <code>appinternals</code> as substring. The credential payload can contain the following entries: 
 
 | Name | Description
 | ---- | -----------
-| `rvbd_dsa_port` | (Optional)The Data Sampling Agent(DSA) port to connect to. default 2111.
-| `rvbd_agent_port` | (Optional) The riverbed agent port to connect to. default 7073.
-| `rvbd_moniker` | (Optional) The moniker name of the application.
-
+| `rvbd_dsa_port` | (Optional)The AppInternals agent (DSA) port (default 2111).
+| `rvbd_agent_port` | (Optional) The AppInternals agent socket port (default 7073).
+| `rvbd_moniker` | (Optional) A custom name for the application (default supplied by agent process discovery).
 
 **NOTE**
 
-Change rvbd_dsa_port and rvbd_agent_port only in case of a port conflict with other apps
+Change `rvbd_dsa_port` and `rvbd_agent_port` only if there is a port conflict
 
-### Example Creating Riverbed Appinternals User-Provided Service Payload
+### Example: Creating Riverbed Appinternals User-Provided Service Payload
 
 ``` 
 cf cups spring-music-appinternals -p '{"rvbd_dsa_port":"9999","rvbd_moniker":"my_app"}'
@@ -44,8 +40,8 @@ The framework can be configured by modifying the [`config/riverbed_appinternals_
 
 | Name | Description
 | ---- | -----------
-| `repository_root` | The URL of the Riverbed Appinternals repository index ([details][repositories]).
-| `version` | The version of Riverbed Appinternals to use.
+| `repository_root` | The URL of the Riverbed Appinternals agent repository index ([details][repositories]).
+| `version` | The version of the Riverbed Appinternals agent to use.
 
 [Configuration and Extension]: ../README.md#configuration-and-extension
 [repositories]: extending-repositories.md
