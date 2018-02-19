@@ -123,7 +123,7 @@ module JavaBuildpack
       end
 
       def lib_ripl_name
-        architecture == 'x86_64' || architecture == 'i686' ? 'libAwProfile64.so' : 'libAwProfile.so'
+        architecture == 'x86_64' || architecture == 'i686' ? 'librpilj64.so' : 'librpilj.so'
       end
 
     end
