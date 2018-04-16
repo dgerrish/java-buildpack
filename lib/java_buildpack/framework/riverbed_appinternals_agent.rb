@@ -94,7 +94,8 @@ module JavaBuildpack
           .add_environment_variable(AIX_INSTRUMENT_ALL,1)
           .add_environment_variable(RVBD_AGENT_FILES,1)
         dsa_host = @application.environment['CF_INSTANCE_IP']
-        `echo "#{dsa_host} test test test #{@application.environment['CF_INSTANCE_GUID']}\n" >> /#{@droplet.sandbox}/staging.log`
+        guid = @application.environment['CF_INSTANCE_GUID']
+        `echo "#{dsa_host} test test test guid: #{guid}\n" >> /#{@droplet.sandbox}/staging.log`
         raise "expect CF_INSTANCE_IP to be set otherwise dsa_host is unavailable" unless dsa_host
         @droplet.environment_variables.add_environment_variable(RVBD_DSA_HOST, dsa_host)
       end
