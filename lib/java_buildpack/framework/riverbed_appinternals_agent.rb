@@ -61,6 +61,7 @@ module JavaBuildpack
 
       def compile
         download_zip(false, @droplet.sandbox, @component_name)
+        `echo "#{@version} is downloaded....\n" >> /#{@droplet.sandbox}/staging.log`
         @droplet.copy_resources
 
       end
