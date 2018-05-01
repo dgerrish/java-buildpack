@@ -17,3 +17,5 @@
 ---
 version: 10.+
 repository_root: https://k8stest.blob.core.windows.net/cftest/
+rvbd_moniker: $(ruby -e "require 'json' ; a = JSON.parse(ENV['VCAP_APPLICATION']);
+          puts \"#{a['application_name']}\"")

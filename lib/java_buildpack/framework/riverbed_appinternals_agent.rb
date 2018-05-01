@@ -80,7 +80,7 @@ module JavaBuildpack
 
       def setup_javaopts(credentials)
         @droplet.java_opts.add_agentpath(agent_path)
-        rvbd_moniker = get_val_in_cred(RVBD_MONIKER, credentials[RVBD_MONIKER], nil, true)
+        rvbd_moniker = get_val_in_cred(RVBD_MONIKER, credentials[RVBD_MONIKER], nil, true) || @configuration[RVBD_MONIKER]
         @droplet.java_opts.add_system_property('riverbed.moniker',rvbd_moniker) unless rvbd_moniker.nil?
       end
 
