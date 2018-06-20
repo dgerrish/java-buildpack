@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Configuration for the riverbed aix agent framework
+# Configuration for the riverbed appinternals agent framework
 ---
 version: 10.+
-repository_root: https://k8stest.blob.core.windows.net/cftest/
+repository_root: https://pcf-instrumentation-download.steelcentral.net/
 rvbd_moniker: $(ruby -e "require 'json' ; a = JSON.parse(ENV['VCAP_APPLICATION']);
           puts \"#{a['application_name']}\"")

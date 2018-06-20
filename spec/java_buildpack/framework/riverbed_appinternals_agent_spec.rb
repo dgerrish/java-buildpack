@@ -23,11 +23,11 @@ describe JavaBuildpack::Framework::RiverbedAppinternalsAgent do
   include_context 'with component help'
 
   context do
-    it 'does not support riverbed-aix-agent service' do
+    it 'does not support riverbed-appinternals-agent service' do
       expect(component.supports?).to be false
     end
 
-    it 'should not detect with riverbed-aix-agent service' do
+    it 'should not detect with riverbed-appinternals-agent service' do
       expect(component.detect).to eq(nil)
     end
   end
@@ -38,16 +38,16 @@ describe JavaBuildpack::Framework::RiverbedAppinternalsAgent do
                                  'tags'        => ['test-service-tag'], 'plan' => 'test-plan',
                                  'credentials' => { 'uri' => 'test-uri' } }] }
     end
-    it 'supports riverbed-aix-agent service' do
+    it 'supports riverbed-appinternals-agent service' do
       expect(component.supports?).to be true
     end
 
-    it 'detects with riverbed-aix-agent service' do
+    it 'detects with riverbed-appinternals-agent service' do
       expect(component.detect).to eq("riverbed-appinternals-agent=#{version}")
     end
     context do
-      it 'unzip riverbed aix agent zip file' ,
-         cache_fixture: 'stub-riverbed-aix-agent.zip' do
+      it 'unzip riverbed appinternals agent zip file' ,
+         cache_fixture: 'stub-riverbed-appinternals-agent.zip' do
 
         component.compile
 
@@ -65,15 +65,14 @@ describe JavaBuildpack::Framework::RiverbedAppinternalsAgent do
   end
 
   context do
-    let(:environment) do
-      super().merge({'CF_INSTANCE_IP'=>'1.2.3.4'})
-    end
+
     before do
       allow(component).to receive(:architecture).and_return('x86_64')
     end
     context do
       before do
         allow(services).to receive(:find_service).and_return('credentials' => {})
+        allow(component).to receive(:version).and_return('10.15.1_BL234')
       end
       it 'sets default values to java opts' do
         component.release
@@ -81,7 +80,7 @@ describe JavaBuildpack::Framework::RiverbedAppinternalsAgent do
         expect(environment_variables).to include('RVBD_AGENT_PORT=7073')
         expect(environment_variables).to include('AIX_INSTRUMENT_ALL=1')
         expect(environment_variables).to include('RVBD_AGENT_FILES=1')
-        expect(environment_variables).to include('RVBD_DSAHOST=1.2.3.4')
+        expect(environment_variables).to include('RVBD_JBP_VERSION=10.15.1_BL234')
         expect(java_opts).to include("-agentpath:$PWD/.java-buildpack/riverbed_appinternals_agent/agent/lib/librpilj64.so")
       end
     end

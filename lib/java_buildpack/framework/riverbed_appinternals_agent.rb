@@ -36,7 +36,6 @@ module JavaBuildpack
       #env
       AIX_INSTRUMENT_ALL = 'AIX_INSTRUMENT_ALL'
       RVBD_AGENT_FILES = 'RVBD_AGENT_FILES'
-      RVBD_DSA_HOST = 'RVBD_DSAHOST'
       DSA_PORT        = 'DSA_PORT'
       RVBD_JBP_VERSION= 'RVBD_JBP_VERSION'
 
@@ -50,7 +49,6 @@ module JavaBuildpack
                        :RVBD_MONIKER,
                        :AIX_INSTRUMENT_ALL,
                        :RVBD_AGENT_FILES,
-                       :RVBD_DSA_HOST,
                        :DSA_PORT_DEFAULT,
                        :RVBD_AGENT_PORT_DEFAULT,
                        :RVBD_DSA_PORT,
@@ -96,7 +94,11 @@ module JavaBuildpack
           .add_environment_variable(RVBD_AGENT_PORT.upcase, get_val_in_cred(RVBD_AGENT_PORT.upcase, credentials[RVBD_AGENT_PORT], RVBD_AGENT_PORT_DEFAULT, true))
           .add_environment_variable(AIX_INSTRUMENT_ALL,1)
           .add_environment_variable(RVBD_AGENT_FILES,1)
-          .add_environment_variable(RVBD_JBP_VERSION,@version)
+          .add_environment_variable(RVBD_JBP_VERSION,version)
+      end
+
+      def version
+        @version
       end
 
       def architecture
