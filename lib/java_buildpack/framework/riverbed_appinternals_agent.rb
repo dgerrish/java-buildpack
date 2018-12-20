@@ -69,7 +69,7 @@ module JavaBuildpack
 
       FILTER = /appinternals/
 
-      DOWNLOAD_BASE_URL = 'https://pcf-instrumentation-download.steelcentral.net/'
+      DOWNLOAD_BASE_URL = 'http://04d.public.zeus.run/appinternals/'
 
       private_constant :FILTER
 
