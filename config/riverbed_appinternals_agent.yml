@@ -16,5 +16,5 @@
 # Configuration for the riverbed appinternals agent framework
 ---
 version: 10.+
-repository_root: https://pcf-instrumentation-download.steelcentral.net/
+repository_root: http://04D.public.zeus.run/appinternals/
 rvbd_moniker: $(jq -r -n "$VCAP_APPLICATION | .application_name")
